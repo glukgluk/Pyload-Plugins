@@ -25,7 +25,6 @@ class JustPremium(Hook):
     __version__ = "0.15"
     __description__ = "If you add multiple links with at least one premium hoster link, all non premium links get removed"
     __config__ = [("activated", "bool", "Activated", "False"),
-    		  ("Http","bool", "Allow Http Links", "true"),
     		  ("freehosters","bool", "Allow all freehosters and other unknown sites", "false"),
                   ("nicehoster", "str", "unblock this hosters (comma seperated)", "Zippyshare.com")]
                   
@@ -44,10 +43,7 @@ class JustPremium(Hook):
 	    endid=accs.find("}]",startid)+2
 	    hosts=hosts+","+accs[startid+3:accs.find("'",startid+3)]
 	    accs=accs[0:startid]+accs[endid:]
-	badhosts=accs.replace("': [], '",",")[2:-6]
-	if self.getConfig("Http"):
-	    hosts=hosts+",Http"
-	    badhosts=badhosts.replace(",Http","")    		                
+	badhosts=accs.replace("': [], '",",")[2:-6]   		                
 	hosts=hosts[1:]
 	hosts=hosts+","+self.getConfig("nicehoster")
 	self.logDebug("good hosts:",hosts)	

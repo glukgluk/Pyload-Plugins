@@ -34,29 +34,29 @@ class JustPremium(Hook):
 
     event_list = ["linksAdded"]
     
-    def coreReady(self) :						                              #initial
+    def coreReady(self) :						         #initial
         accs=str(self.core.accountManager.getAccountInfos())
-	global badhosts							                                    #this hosts are blocked
-	hosts = ""							                                        #hosts have no function it is only for debuging
-	while "[{" in accs:						                                  #search all activatet hosts an reove it from the badlist 
+	global badhosts							         #this hosts are blocked
+	hosts = ""							         #hosts have no function it is only for debuging
+	while "[{" in accs:						         #search all activatet hosts an reove it from the badlist 
 	    startid=accs.rfind("[], ", 0, accs.find("[{"))+2
 	    endid=accs.find("}]",startid)+2
 	    hosts=hosts+","+accs[startid+3:accs.find("'",startid+3)]
 	    accs=accs[0:startid]+accs[endid:]
 	badhosts=accs.replace("': [], '",",")[2:-6]
-	if self.getConfig("Ftp"):					#add or remove Ftp to badlist
+	if self.getConfig("Ftp"):					         #add or remove Ftp to badlist
 	    hosts=hosts+",Ftp"
 	    badhosts=badhosts.replace(",Ftp","")
 	if self.getConfig("Http"):
 	    hosts=hosts+",Http"
-	    badhosts=badhosts.replace(",Http","")    		                  #add or remove Http to badlist
+	    badhosts=badhosts.replace(",Http","")    		                 #add or remove Http to badlist
 	hosts=hosts[1:]
 	badhosts=badhosts+","+self.getConfig("unhoster")
 	self.logDebug("good hosts:",hosts)	
         self.logDebug("bad hosts:",badhosts)	
 
 
-    def filterLinks(self, t):						                            #trigger when a link is added
+    def filterLinks(self, t):						         #trigger when a link is added
         links = self.core.api.checkURLs(t)				
         hosters = [x.strip() for x in badhosts.split(",")]
 	for bhoster in links:

@@ -5,6 +5,7 @@ Update V0.15 - 7.8.2014
 
 Function:
 If you add multiple link and one of this are from a registered premium hoster all links from non premium hosters would be deleted
+
 Example: A DLC with Uploaded, Shareonline and Zippyfiles Links are added. If you have just a Uploaded Account the other two hosters would be deleted
 
 Options:

@@ -1,0 +1,68 @@
+# -*- coding: utf-8 -*-
+"""
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License,
+    or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, see <http://www.gnu.org/licenses/>.
+
+    @author: mazleu
+"""
+from module.plugins.Hook import Hook
+from module.plugins.Account import Account
+from module.plugins.Hoster import Hoster
+
+
+class JustPremium(Hook):
+    __name__ = "JustPremium"
+    __version__ = "0.1"
+    __description__ = "just add links fom your premium hosters (if you need a other hoster with no premium, add a pseudo account for this hoster)"
+    __config__ = [("activated", "bool", "Activated", "False"),
+                  ("Ftp", "bool", "Allow Ftp Links", "true"),
+    		  ("Http","bool", "Allow Http Links", "true"),
+                  ("unhoster", "str", "other blocked Hosters (comma seperated,", "Zippyshare.com")]
+                  
+    __author_name__ = ("mazleu")
+    __author_mail__ = ("mazleica@gmail.com")
+
+    event_list = ["linksAdded"]
+    
+    def coreReady(self) :						                              #initial
+        accs=str(self.core.accountManager.getAccountInfos())
+	global badhosts							                                    #this hosts are blocked
+	hosts = ""							                                        #hosts have no function it is only for debuging
+	while "[{" in accs:						                                  #search all activatet hosts an reove it from the badlist 
+	    startid=accs.rfind("[], ", 0, accs.find("[{"))+2
+	    endid=accs.find("}]",startid)+2
+	    hosts=hosts+","+accs[startid+3:accs.find("'",startid+3)]
+	    accs=accs[0:startid]+accs[endid:]
+	badhosts=accs.replace("': [], '",",")[2:-6]
+	if self.getConfig("Ftp"):					#add or remove Ftp to badlist
+	    hosts=hosts+",Ftp"
+	    badhosts=badhosts.replace(",Ftp","")
+	if self.getConfig("Http"):
+	    hosts=hosts+",Http"
+	    badhosts=badhosts.replace(",Http","")    		                  #add or remove Http to badlist
+	hosts=hosts[1:]
+	badhosts=badhosts+","+self.getConfig("unhoster")
+	self.logDebug("good hosts:",hosts)	
+        self.logDebug("bad hosts:",badhosts)	
+
+
+    def filterLinks(self, t):						                            #trigger when a link is added
+        links = self.core.api.checkURLs(t)				
+        hosters = [x.strip() for x in badhosts.split(",")]
+	for bhoster in links:
+            if bhoster in hosters:
+                for link in links[bhoster]:
+                    t.remove(link)
+                    self.logDebug("removed link '%s'because hoster was: '%s' " % (link,bhoster))
+    def linksAdded(self, links, pid):
+        self.filterLinks(links)

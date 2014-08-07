@@ -16,7 +16,7 @@ Allow all freehosters and other unknown sites: If this option is activated, just
 Funktion:
 Wenn mehrere Links hinzugefügt werden, und sich darunter einer von einem eingetragenem Hoster befindet, dann werden die Links von allen nicht eingetragenen Hostern entfernt.
 
-Beispiel: Ein DLC mit Uploaded, Shareonline und Zippyfiles hinzufügt und man einen Uploaded Account hat, werden die beiden anderen Hoster entfernt.
+Beispiel: Ein DLC mit Uploaded, Shareonline und Zippyfiles wird hinzufügt und man einen Uploaded Account hat, werden die beiden anderen Hoster entfernt.
 
 Optionen:
 unblock this hosters (comma seperated): Alle hier eingetragenen Hoster (im pyloadformat) werden nie geblockt. Kann zB für einen Lieblings Freehoster genutzt werden.

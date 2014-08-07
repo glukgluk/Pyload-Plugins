@@ -27,7 +27,7 @@ class JustPremium(Hook):
     __config__ = [("activated", "bool", "Activated", "False"),
     		  ("Http","bool", "Allow Http Links", "true"),
     		  ("freehosters","bool", "Allow all freehosters and other unknown sites", "false"),
-                  ("nicehoster", "str", "unblocked this hosters (comma seperated)", "Zippyshare.com")]
+                  ("nicehoster", "str", "unblock this hosters (comma seperated)", "Zippyshare.com")]
                   
     __author_name__ = ("mazleu")
     __author_mail__ = ("mazleica@gmail.com")

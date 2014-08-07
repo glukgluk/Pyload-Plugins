@@ -22,47 +22,59 @@ from module.plugins.Hoster import Hoster
 
 class JustPremium(Hook):
     __name__ = "JustPremium"
-    __version__ = "0.1"
-    __description__ = "just add links fom your premium hosters (if you need a other hoster with no premium, add a pseudo account for this hoster)"
+    __version__ = "0.15"
+    __description__ = "If you add multiple links with at least one premium hoster link, all non premium links get removed"
     __config__ = [("activated", "bool", "Activated", "False"),
-                  ("Ftp", "bool", "Allow Ftp Links", "true"),
     		  ("Http","bool", "Allow Http Links", "true"),
-                  ("unhoster", "str", "other blocked Hosters (comma seperated,", "Zippyshare.com")]
+    		  ("freehosters","bool", "Allow all freehosters and other unknown sites", "false"),
+                  ("nicehoster", "str", "unblocked this hosters (comma seperated)", "Zippyshare.com")]
                   
     __author_name__ = ("mazleu")
     __author_mail__ = ("mazleica@gmail.com")
 
     event_list = ["linksAdded"]
     
-    def coreReady(self) :						         #initial
+    def coreReady(self) :						         
         accs=str(self.core.accountManager.getAccountInfos())
-	global badhosts							         #this hosts are blocked
-	hosts = ""							         #hosts have no function it is only for debuging
-	while "[{" in accs:						         #search all activatet hosts an reove it from the badlist 
+	global badhosts							         
+	global hosts						
+	hosts = ""							         
+	while "[{" in accs:						          
 	    startid=accs.rfind("[], ", 0, accs.find("[{"))+2
 	    endid=accs.find("}]",startid)+2
 	    hosts=hosts+","+accs[startid+3:accs.find("'",startid+3)]
 	    accs=accs[0:startid]+accs[endid:]
 	badhosts=accs.replace("': [], '",",")[2:-6]
-	if self.getConfig("Ftp"):					         #add or remove Ftp to badlist
-	    hosts=hosts+",Ftp"
-	    badhosts=badhosts.replace(",Ftp","")
 	if self.getConfig("Http"):
 	    hosts=hosts+",Http"
-	    badhosts=badhosts.replace(",Http","")    		                 #add or remove Http to badlist
+	    badhosts=badhosts.replace(",Http","")    		                
 	hosts=hosts[1:]
-	badhosts=badhosts+","+self.getConfig("unhoster")
+	hosts=hosts+","+self.getConfig("nicehoster")
 	self.logDebug("good hosts:",hosts)	
         self.logDebug("bad hosts:",badhosts)	
 
 
-    def filterLinks(self, t):						         #trigger when a link is added
+    def filterLinks(self, t):						        
         links = self.core.api.checkURLs(t)				
-        hosters = [x.strip() for x in badhosts.split(",")]
-	for bhoster in links:
-            if bhoster in hosters:
-                for link in links[bhoster]:
-                    t.remove(link)
-                    self.logDebug("removed link '%s'because hoster was: '%s' " % (link,bhoster))
+        hosterlist =""
+	bhosters = [x.strip() for x in badhosts.split(",")]
+	ghosters = [x.strip() for x in hosts.split(",")]
+	premhoster = False
+	for hoster in links:
+	    self.logDebug(hoster)
+            if hoster in ghosters:
+                premhoster = True
+	if premhoster :
+	    for hoster in links:
+		if self.getConfig("freehosters"):
+		    if hoster in bhosters:
+			for link in links[hoster]:
+			    t.remove(link)
+			    self.logDebug("removed link '%s'because hoster was: '%s' " % (link,hoster))     
+		else:	
+		    if not hoster in ghosters:
+		        for link in links[hoster]:
+			    t.remove(link)
+			    self.logDebug("removed link '%s'because hoster was: '%s' " % (link,hoster))
     def linksAdded(self, links, pid):
         self.filterLinks(links)

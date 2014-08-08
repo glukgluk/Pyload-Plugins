@@ -34,7 +34,7 @@ V0.1: First version
 
 ------------------------
 <b>Instal:</b><br>
-Downoad the file <url="https://raw.githubusercontent.com/glukgluk/JustPremium/master/JustPremium.py">JustPremium.py</url><br> 
+Downoad the file <a href="https://raw.githubusercontent.com/glukgluk/JustPremium/master/JustPremium.py">JustPremium.py</a><br> 
 Put it in the folder ~/pyload/userplugins/hooks/<br>
 Restart pyload<br>
 If it added succesfull you find the plugin on the webinterface under Config -> Plugins -> JustPremium

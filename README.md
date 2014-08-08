@@ -28,6 +28,6 @@ Allow all freehosters and other unknown sites: Ist diese Option aktiviert, werde
 
 ------------------------
 <b>Changelog</b> <br>
-V0.16: Add better info log (now you see which hosters are removed)
-V0.15: Rewrite the whole hook
+V0.16: Add better info log (now you see which hosters are removed)<br>
+V0.15: Rewrite the whole hook<br>
 V0.1: First version

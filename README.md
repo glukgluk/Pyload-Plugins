@@ -35,7 +35,7 @@ V0.15: Rewrite the whole hook<br>
 V0.1: First version
 
 ------------------------
-<b>Instal:</b><br>
+<b>Install:</b><br>
 Downoad the file <a href="https://raw.githubusercontent.com/glukgluk/JustPremium/master/JustPremium.py">JustPremium.py</a><br> 
 Put it in the folder ~/pyload/userplugins/hooks/<br>
 Restart pyload<br>

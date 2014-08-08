@@ -1,5 +1,5 @@
-<h1>Justpremium V0.16</h1><br>
-Update to V0.16 - 8.8.2014
+<h1>Justpremium V0.16 [hook for pyload]</h1>
+Update to V0.16 - 8.8.2014<br>
 
 <b>English</b><br>
 

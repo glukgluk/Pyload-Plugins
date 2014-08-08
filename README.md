@@ -30,7 +30,7 @@ Allow all freehosters and other unknown sites: Ist diese Option aktiviert, werde
 
 ------------------------
 <b>Changelog</b> <br>
-V0.16: Add better info log (now you see which hosters are removed)<br>
+V0.16:  Enhanced logging: Removed Hosters are tracked<br>
 V0.15: Rewrite the whole hook<br>
 V0.1: First version
 
@@ -39,6 +39,6 @@ V0.1: First version
 Downoad the file <a href="https://raw.githubusercontent.com/glukgluk/JustPremium/master/JustPremium.py">JustPremium.py</a><br> 
 Put it in the folder ~/pyload/userplugins/hooks/<br>
 Restart pyload<br>
-If it added succesfull you find the plugin on the webinterface under Config -> Plugins -> JustPremium
+Provided a successful installation you will find the plugin ... plugin on the webinterface under Config -> Plugins -> JustPremium<br>
 Activate it
 

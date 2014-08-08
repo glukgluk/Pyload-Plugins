@@ -1,6 +1,6 @@
-Justpremium V0.15
+Justpremium V0.16
 =================
-Update V0.15 - 7.8.2014
+Update V0.16 - 8.8.2014
 
 
 Function:
@@ -22,3 +22,7 @@ Beispiel: Ein DLC mit Uploaded, Shareonline und Zippyfiles wird hinzufügt und m
 Optionen:
 unblock this hosters (comma seperated): Alle hier eingetragenen Hoster (im pyloadformat) werden nie geblockt. Kann zB für einen Lieblings Freehoster genutzt werden.
 Allow all freehosters and other unknown sites: Ist diese Option aktiviert, werden nur die Links von Accounts, die unter "Konten" ausgewählt werden können und nicht registriert sind, entfernt, sonnst werden alle bis auf die registrierten entfernt.
+
+------------------------
+Changelog 
+V 0.16 add better info log (now you see which hosters are removed)

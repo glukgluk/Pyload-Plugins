@@ -1,6 +1,6 @@
-Justpremium V0.16<br>
+<h3>Justpremium V0.16</h3>
 Update to V0.16 - 8.8.2014
-=================
+-----------------------------------
 
 <b>English</b><br>
 

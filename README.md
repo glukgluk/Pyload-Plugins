@@ -25,4 +25,4 @@ Allow all freehosters and other unknown sites: Ist diese Option aktiviert, werde
 
 ------------------------
 Changelog 
-V 0.16 add better info log (now you see which hosters are removed)
+V0.16 add better info log (now you see which hosters are removed)

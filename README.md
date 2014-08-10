@@ -7,6 +7,6 @@ Wenn mehrere Links hinzugefügt werden, und sich darunter einer von einem einget
 
 --------
 
-<a href="https://github.com/glukgluk/Pyload-Plugins/blob/master/README_LC.md">[Crypter]LinkCryptWS</a><br> 
+<a href="https://github.com/glukgluk/Pyload-Plugins/blob/master/README_CL.md">[Crypter]LinkCryptWS</a><br> 
 Add pyload support for LinkCrypt.ws <br>
 Unterstützung von LinkCrypt.ws für pyload

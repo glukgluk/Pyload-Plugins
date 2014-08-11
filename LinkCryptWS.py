@@ -20,7 +20,7 @@ class LinkCryptWS(Crypter):
     __name__ = "LinkCryptWS"
     __type__ = "crypter"
     __pattern__ = r"http://(?:www.)?linkcrypt.ws/(?:dir|container)/(?P<id>\w+)"
-    __version__ = "0.02"
+    __version__ = "0.03"
     __description__ = """LinkCrypt.ws Crypter Plugin"""
     __author_name__ = ("kagenoshin,glukgluk")
     __author_mail__ = ("kagenoshin[AT]gmx[DOT]ch")
@@ -223,6 +223,7 @@ class LinkCryptWS(Crypter):
                 jseval = self.handle_javascript(line)
 		clink = re.search(r'href=["\']([^"\']*?)["\']',jseval,re.I)
                 if clink:
+                    self.logDebug("clink avaible")
                     (package_name, folder_name) = self.getPackageInfo()
                     self.logDebug("Added package with name %s.%s and container link %s" %( package_name, type_, clink.group(1)))
                     self.core.api.uploadContainer( "%s.%s" %(package_name, type_), self.load(clink.group(1)))
@@ -233,21 +234,22 @@ class LinkCryptWS(Crypter):
     def handleCNL2(self):
         package_links = []
         self.logDebug("Search for CNL links")
-        cnl_line = None
+	cnl_line = None
         for line in self.container_html:
             if("cnl" in line):
                 cnl_line = line
                 break
 
         if cnl_line:
-            try:
+            self.logDebug("cnl_line gefunden")
+	    try:
                 cnl_section = self.handle_javascript(cnl_line)
                 (vcrypted, vjk) = self._getCipherParams(cnl_section)
                 for (crypted, jk) in zip(vcrypted, vjk):
                     package_links.extend(self._getLinks(crypted, jk))
-            except:
-                self.fail("Unable to decrypt CNL links")
-
+            except: 
+                self.logError("Unable to decrypt CNL links (JS Error) try to get over links")
+                return self.handleWebLinks()
         return package_links
     
     def _getCipherParams(self, cnl_section):

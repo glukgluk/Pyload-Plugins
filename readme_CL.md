@@ -21,7 +21,7 @@ KeyCaptcha versuche ich noch einzupflegen.
 
 ------------------------
 <b>Changelog</b> <br>
-V0.03: Add fallback to link decryption for windows users with jse problems
+V0.03: Add fallback to link decryption for windows users with jse problems <br>
 V0.02: Debug and rewrite the very old and bugy Version 0.01
 
 

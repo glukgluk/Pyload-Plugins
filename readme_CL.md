@@ -1,5 +1,5 @@
-<h1>LinkCryptWS V0.16 [Crypter for pyload]</h1>
-Update to V0.02 - 10.8.2014 
+<h1>LinkCryptWS V0.03 [Crypter for pyload]</h1>
+Update to V0.03 - 11.8.2014 
 
 -------------------
 
@@ -21,7 +21,9 @@ KeyCaptcha versuche ich noch einzupflegen.
 
 ------------------------
 <b>Changelog</b> <br>
+V0.03: Add fallback to link decryption for windows users with jse problems
 V0.02: Debug and rewrite the very old and bugy Version 0.01
+
 
 ------------------------
 <b>Install:</b><br>

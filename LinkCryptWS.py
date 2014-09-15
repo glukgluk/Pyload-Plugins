@@ -120,7 +120,7 @@ class LinkCryptWS(Crypter):
         return False
 
     def isKeyCaptchaProtected(self):
-        if(re.search(r'<form.*?id\s*?=\s*?"captcha"[^>]*?>', self.html, re.I)):
+        if "<title>Linkcrypt.ws // Captx</title>" in self.html:
             return True
         return False
         
